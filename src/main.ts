@@ -12,4 +12,6 @@ const balance = new Prix3Fit(
   })
 );
 
-balance.getWeigth().then((weigth) => console.log(weigth));
+// balance.getWeigth().then((weigth) => console.log(weigth));
+
+balance.setPrice(0);
