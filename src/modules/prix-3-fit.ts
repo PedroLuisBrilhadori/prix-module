@@ -1,5 +1,5 @@
-import { SerialPort } from "serialport";
 import timeout from "../utils/timeout";
+import SerialPort from "../models/serial.model";
 
 export default class Prix3Fit {
   private connection: SerialPort;

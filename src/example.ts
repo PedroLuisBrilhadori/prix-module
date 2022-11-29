@@ -16,3 +16,5 @@ const scale = new Prix3Fit(
     baudRate: Number(SERIAL_BAUDRATE),
   })
 );
+
+scale.getWeigth().then((weigth) => console.log(weigth));
