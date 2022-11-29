@@ -24,6 +24,10 @@ export default class Prix3Fit {
 
   private nak = "\x15";
 
+  /**
+   * send [ENQ] to recive [STX]PPPPPP[ETX] from scale
+   * @returns a promise of weigth
+   */
   async getWeigth(): Promise<number> {
     this.connection.write(this.enq, "ascii", (error) => {
       if (error)
@@ -37,6 +41,10 @@ export default class Prix3Fit {
     return weigth;
   }
 
+  /**
+   * send [STX]PPPPPP[ETX] to set price in scale
+   * @param price a price to set in scale
+   */
   async setPrice(price: number) {
     const value = this.santinizePrice(price);
 
@@ -55,6 +63,10 @@ export default class Prix3Fit {
     }
   }
 
+  /**
+   * send [SOH]WWWWWW[ETX] to set tare in scale
+   * @param tare a tare to set in scale
+   */
   setTare(tare: number) {}
 
   /** clean response [STX]000000[ETX] to number */
