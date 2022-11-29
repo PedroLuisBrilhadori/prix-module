@@ -1,9 +1,10 @@
 {
   "name": "prix-3-fit-module",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "keywords": [
     "prix 3 fit",
-    "toledo"
+    "toledo",
+    "balança"
   ],
   "description": "Modulo para a balança Toledo Prix 3 fit",
   "main": "./dist/index.js",
