@@ -1,6 +1,6 @@
 {
   "name": "prix-3-fit-module",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "keywords": [
     "prix 3 fit",
     "toledo",
@@ -17,7 +17,7 @@
   "scripts": {
     "build": "npx tsc",
     "build:types": "npx tsc --declaration --emitDeclarationOnly",
-    "dev": "ts-node-dev --respawn src/example.ts"
+    "dev": "ts-node-dev --respawn src/example/main.ts"
   },
   "devDependencies": {
     "@types/node": "^18.7.2",

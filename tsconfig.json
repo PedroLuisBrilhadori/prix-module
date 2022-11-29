@@ -22,5 +22,5 @@
     "moduleResolution": "node",
     "baseUrl": "."
   },
-  "exclude": ["./src/example.ts", "./dist", "./node_modules"]
+  "exclude": ["src/example", "./dist", "./node_modules"]
 }
