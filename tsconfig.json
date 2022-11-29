@@ -21,5 +21,6 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "baseUrl": "."
-  }
+  },
+  "exclude": ["./src/example.ts"]
 }

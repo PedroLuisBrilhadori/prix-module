@@ -24,14 +24,15 @@ export default class Prix3Fit {
 
   private nak = "\x15";
 
+  private soh = "\x01";
+
   /**
    * send [ENQ] to recive [STX]PPPPPP[ETX] from scale
    * @returns a promise of weigth
    */
   async getWeigth(): Promise<number> {
     this.connection.write(this.enq, "ascii", (error) => {
-      if (error)
-        throw new Error(`Error [name: ${error?.name}]: \n${error?.message}`);
+      if (error) this.prixError(error);
     });
 
     await timeout(200);
@@ -49,9 +50,7 @@ export default class Prix3Fit {
     const value = this.santinizePrice(price);
 
     this.connection.write(value, "ascii", (error) => {
-      if (error) {
-        throw new Error(`Error [name: ${error?.name}]: \n${error?.message}`);
-      }
+      if (error) this.prixError(error);
     });
 
     await timeout(200);
@@ -59,7 +58,7 @@ export default class Prix3Fit {
     const response = this.data.pop();
 
     if (response === this.nak) {
-      throw new Error(`Um erro ocorreu ao enviar o preço`);
+      this.prixError(`Um erro ocorreu ao enviar o preço`);
     }
   }
 
@@ -67,32 +66,72 @@ export default class Prix3Fit {
    * send [SOH]WWWWWW[ETX] to set tare in scale
    * @param tare a tare to set in scale
    */
-  setTare(tare: number) {}
+  async setTare(tare: number) {
+    const value = this.santinizeTare(tare);
+
+    this.connection.write(value, "ascii", (error) => {
+      if (error) this.prixError(error);
+    });
+
+    await timeout(300);
+
+    const response = this.data.pop();
+
+    if (response === this.nak) {
+      this.prixError(`Um erro ocorreu ao enviar a tara`);
+    }
+  }
 
   /** clean response [STX]000000[ETX] to number */
   private santinizeWeight(value: string): number {
     return Number(value.replace(this.stx, "").replace(this.etx, ""));
   }
 
-  /** transform price 3.50 to [STX]000350[ETX] */
+  /** transform price 3.5 to [STX]000350[ETX] */
   private santinizePrice(value: number): string {
-    let price: string = String(value);
+    let price = this.decimalToString(value);
 
-    if (price.includes(".")) {
-      price = price.replace(".", "");
-      if (price.length <= 2) price += "0";
-    }
+    price = this.addLeftZeros(price);
 
+    return `${this.stx}${price}${this.etx}`;
+  }
+
+  /** transform tare 3.5 to [SOH]000350[ETX] */
+  private santinizeTare(value: number): string {
+    let tare = this.decimalToString(value);
+    tare = this.addLeftZeros(tare);
+
+    return `${this.soh}${tare}${this.etx}`;
+  }
+
+  /** add left zeros in number string */
+  private addLeftZeros(value: string): string {
     let zero = "";
 
-    for (let i = 0; i < 6 - price.length; i++) {
+    for (let i = 0; i < 6 - value.length; i++) {
       zero += "0";
     }
 
-    price = zero + price;
+    return zero + value;
+  }
 
-    console.log(price);
+  /** transform 3.5 to 350 */
+  private decimalToString(value: number): string {
+    let number: string = String(value);
 
-    return `${this.stx}${price}${this.etx}`;
+    if (number.includes(".")) {
+      if (number.split(".")[1].length < 2) number += "0";
+      number = number.replace(".", "");
+    }
+
+    return number;
+  }
+
+  private prixError(error: Error | string) {
+    if (typeof error === "string") {
+      throw new Error(error);
+    }
+
+    throw new Error(`Error [name ${error.name}]: \n${error.message}`);
   }
 }
