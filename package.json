@@ -2,11 +2,12 @@
   "name": "prix-module",
   "version": "1.0.0",
   "description": "Modulo para a balança Toledo Prix 3 fit",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "author": "PedroLuisBrilhadori <pedroluisbrilhadori@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "npx tsc",
+    "build:types": "npx tsc --declaration --emitDeclarationOnly",
     "dev": "ts-node-dev --respawn src/example.ts"
   },
   "devDependencies": {

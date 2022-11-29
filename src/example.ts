@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import { SerialPort } from "serialport";
 
-import Prix3Fit from "./modules/prix-3-fit";
+import { Prix3Fit } from "./index";
 
 dotenv.config();
 

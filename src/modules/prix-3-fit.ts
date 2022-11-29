@@ -2,9 +2,9 @@ import { SerialPort } from "serialport";
 import timeout from "../utils/timeout";
 
 export default class Prix3Fit {
-  connection: SerialPort;
+  private connection: SerialPort;
 
-  data: string[] = [];
+  private data: string[] = [];
 
   constructor(connection: SerialPort) {
     this.connection = connection;
