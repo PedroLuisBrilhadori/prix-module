@@ -24,6 +24,18 @@ export default class Prix3FitMock extends EventEmitter implements SerialPort {
 
   private tare = "000000";
 
+  private changeWeight() {
+    const weights = [
+      `${this.stx}001000${this.etx}`,
+      `${this.stx}000000${this.etx}`,
+      `${this.stx}002000${this.etx}`,
+      `${this.stx}000300${this.etx}`,
+      `${this.stx}000500${this.etx}`,
+    ];
+
+    return weights[Math.floor(Math.random() * weights.length)];
+  }
+
   write(
     chunk: any,
     encoding?: BufferEncoding | undefined,
@@ -58,7 +70,7 @@ export default class Prix3FitMock extends EventEmitter implements SerialPort {
   }
 
   private getWeight(): string {
-    return this.weight;
+    return this.changeWeight();
   }
 
   // TODO: criar verificação do preço recebido e retornar erros

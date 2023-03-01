@@ -1,13 +1,12 @@
 {
   "name": "prix-module",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "keywords": [
     "prix 3 fit",
     "toledo",
     "balança"
   ],
   "description": "Modulo para a balança Toledo Prix 3 fit",
-  "main": "./dist/index.js",
   "author": "PedroLuisBrilhadori <pedroluisbrilhadori@gmail.com>",
   "license": "MIT",
   "repository": {
