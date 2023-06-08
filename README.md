@@ -8,7 +8,7 @@
 ![Bitbucket open issues](https://img.shields.io/github/issues/PedroLuisBrilhadori/prix-module?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/github/issues-pr/PedroLuisBrilhadori/prix-module?style=for-the-badge)
 
-> Modulo para enviar preço, enviar tara de peso e receber o peso da balança Toledo Prix 3 fit.
+> Modulo para enviar, enviar tara e receber o peso da balança Toledo Prix 3 fit.
 
 ### Ajustes e melhorias
 
